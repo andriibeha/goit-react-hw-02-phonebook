@@ -21,7 +21,7 @@ class App extends Component {
                 <From
                     onSubmit={this.onSubmit}
                 />
-                <ContactList contact={this.state.contacts} />
+                <ContactList  />
             </div>
         ) 
     }
