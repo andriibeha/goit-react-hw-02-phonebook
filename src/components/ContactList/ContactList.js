@@ -4,9 +4,9 @@ import { Component } from "react";
 const ContactList = ({ contact }) => {
 
     return (
-        <ul>
-
-        </ul>
+        <div>
+            CONTACT LIST 
+        </div>
     )
 }
 

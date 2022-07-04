@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { nanoid } from 'nanoid'
 import From from "../Form/Form";
 import ContactList from "../ContactList/ContactList";
 
