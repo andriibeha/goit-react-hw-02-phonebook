@@ -2,32 +2,39 @@ import React, { Component } from "react";
 import From from "../Form/Form";
 import ContactList from "../ContactList/ContactList";
 import Filter from "components/Filter/Filter";
+import s from './App.module.css'
 
 
 class App extends Component { 
     state = {
-        contacts: [
-            {id:"1", name:"Tom", number:"123-45-67"}
-        ],
+        contacts: [],
         filter: ""
     };
 
     onSubmit = data => {
-        console.log("state name", this.state.contacts.name);
-        console.log("data name", data.name)
-        if (this.state.contacts.name === data.name) { 
-            return alert(`${data.name} already in contact`)
+        let findName = this.state.contacts.find(item => item.name === data.name)
+
+        if (findName) { 
+            return alert(`${data.name} is already in contact`)
         } else { 
             this.setState(({contacts}) => ({
             contacts: [...contacts, data]
-        }))
-        }   
-        
+            }))
+            
+        }
     };
 
     onFilter = (e) => {
         this.setState({filter: e.target.value})
     };
+
+    handleClickDeleteBtn = (id) => {
+        this.setState(prevState => ({
+            contacts: prevState.contacts.filter(
+                contact => contact.id !== id
+            )
+        }))
+    }
 
     getVisibleContacts = () => {
         const { contacts, filter } = this.state
@@ -43,7 +50,7 @@ class App extends Component {
         const visibleContacts = this.getVisibleContacts()
 
         return (
-            <div>
+            <div className={s.container}>
                 <h1>Phonebook</h1>
                 <From
                     onSubmit={this.onSubmit}
@@ -55,7 +62,10 @@ class App extends Component {
                     onChange={this.onFilter}
                 />
 
-                <ContactList contacts={visibleContacts} />
+                <ContactList
+                    contacts={visibleContacts}
+                    onDeleteClick={this.handleClickDeleteBtn}
+                />
             </div>
         ) 
     }

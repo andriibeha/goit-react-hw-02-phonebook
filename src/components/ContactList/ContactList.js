@@ -1,12 +1,12 @@
 import ContactItem from "components/ContactItem/ContactItem";
+import s from "./ContactList.module.css"
 
-
-const ContactList = ({ contacts }) => {
+const ContactList = ({ contacts, onDeleteClick }) => {
 
     return (
-        <ul>    
+        <ul className={s.list}>    
             {contacts.map((item) => (
-                <ContactItem key={item.id} item={item} />
+                <ContactItem key={item.id} item={item} onDeleteClick={onDeleteClick} />
             ))}
         </ul>
     )
